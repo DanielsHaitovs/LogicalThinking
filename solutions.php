@@ -71,46 +71,28 @@ class SummationService
         }
     }
 }
-
-echo '<br>';
-
-// 1. THIS DOES NOT WORK EVEN USING NAIVE DATA EXAMPLES FORM THE ASSESSMENT ITSELF, JUSR TRY 'aaa' AS INPUT, EXPECTED 'aa' BUT GOT ''
-// 2. SAME APPLIES TO 'aZAzaz', EXPECTED 'aZAzaz' BUT GOT ''
-// 3. EVEN IF YOU MAKE IT WORK, IT'S STILL VERY SLOW, YOU CAN DO IT IN 1 PASS USING HASHSET AND STACK
-// - have two indexes (i, j) tracking beginning / ending of the sequence
-// - MOVE J forward until moment when HASHSET does not contain '2-char sequence' it producing with previous letter
-// - MOVE I forward and remove sequence it produced with prior letter until removing '2-char sequence' that was precenting J to move forward
-
-
-echo '<br> <h1>Task Nr.3</h1>';
-
-//$text = 'kkkbnbfoalbaskbqnbwer0rasdfalm12nb3k';
-//kbnbfoalbaskb
-//nbfoalbaskbqnb
-//$text = 'aaa';
-//$text = 'aZaZaZ';
-$text = 'aZAzaz';
-echo $text . '<br>';
-echo '<br>' . longestSubstr($text) . '<br>';
+$text = 'aZaZaZ';
+echo '<br><br>' . longestSubstr($text) . '<br>';
 function longestSubstr(string $text): string
 {
-
+    $temp = $text;
     $result = '';
-    while (strlen($text) > 1) {
-        $base = substr($text, 0, 1);
-        $str = $base;
 
-        $text = substr($text, 1);
-        if (substr_count($text, $base)) {
-            for ($i = 0; $i <= strpos($text, $base); $i++) {
-                $str .= $text[$i];
-            }
-            if (strlen($str) > strlen($result)) {
-                $result = $str;
-                echo '<br>';
+    do {
+        $base = substr($text, 0, 2);
+        if (substr_count($text, $base, 1)) {
+            $step = substr($text, 0, strpos($text, $base, 1) + 1);
+            if (strlen($step) > strlen($result)) {
+                $result = $step;
             }
         }
+        $text = substr($text, 1);
+    } while (strlen($text) > 1);
+
+    if ($result == '') {
+        $result = $temp;
     }
 
     return $result;
 }
+
