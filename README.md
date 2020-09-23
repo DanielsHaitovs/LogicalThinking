@@ -1,1 +1,1 @@
-# Validate
+Logical Thinking
