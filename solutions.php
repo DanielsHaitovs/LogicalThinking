@@ -30,6 +30,8 @@ function findOddEvenPair($numbers)
     }
 }
 
+echo 'test';
+
 if (findOddEvenPair($numbers) === NULL) {
     echo 'The is no pair of ODD&EVEN numbers';
 } else {
