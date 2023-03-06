@@ -39,6 +39,7 @@ if (findOddEvenPair($numbers) === NULL) {
 
 echo '<br>';
 
+echo 'stage';
 
 $service = new SummationService($numbers);
 
